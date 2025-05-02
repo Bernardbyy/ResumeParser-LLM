@@ -1,12 +1,14 @@
 # Resume Parser with LLM Integration
 
 A Flask-based web application that uses Large Language Models (LLMs) to extract structured information from resumes.
+
 Reference: https://github.com/pik1989/Resume-Parser-OpenAI
+LLM Model: [DeepSeek Chat V3](https://openrouter.ai/models/deepseek-chat)
 
 ## Features
 
 - PDF resume parsing and text extraction
-- Integration with DeepSeek Chat V3 via OpenRouter API
+- Integration with DeepSeekV3 via OpenRouter API
 - JSON-structured data extraction for resume components
 - Clean, modern UI for displaying parsed resume information
 
@@ -14,7 +16,7 @@ Reference: https://github.com/pik1989/Resume-Parser-OpenAI
 
 - **Backend**: Python, Flask
 - **PDF Processing**: PyPDF
-- **LLM Integration**: OpenRouter API (with DeepSeek Chat V3 model)
+- **LLM Integration**: OpenRouter API (with [DeepSeekV3](https://openrouter.ai/models/deepseek-chat) model)
 - **Frontend**: HTML, Tailwind CSS, JavaScript
 
 ## Setup Instructions
