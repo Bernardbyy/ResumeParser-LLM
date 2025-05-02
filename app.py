@@ -1,4 +1,4 @@
-# FLASK APP - Run the app using flask --app app.py run
+# FLASK APP - Run the app using flask --app app.py run (Creates a simple web server with two routes)
 import os, sys
 from flask import Flask, request, render_template
 from pypdf import PdfReader 
@@ -11,11 +11,12 @@ sys.path.insert(0, os.path.abspath(os.getcwd()))
 UPLOAD_PATH = r"__DATA__"
 app = Flask(__name__)
 
-
+# Renders the main page
 @app.route('/')
 def index():
     return render_template('index.html')
 
+# Handles resume uploads, processes them, and returns results
 @app.route("/process", methods=["POST"])
 def ats():
     doc = request.files['pdf_doc']

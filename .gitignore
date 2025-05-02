@@ -1,0 +1,46 @@
+# Python-specific
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environment
+venv/
+ENV/
+resumeParser/
+
+# Config with API keys
+config.yaml
+
+# Data files
+__DATA__/
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Ignore testing Python scripts
+test_openai.py
+test_openrouter.py
+resumeparser_openAI.py
+
+# Ignore a specific PDF file
+BYYResume (Feb 2025) - Dummy.pdf
