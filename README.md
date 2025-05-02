@@ -1,9 +1,10 @@
 # Resume Parser with LLM Integration
 
-A Flask-based web application that uses Large Language Models (LLMs) to extract structured information from resumes.
+A Flask-based web application that uses Large Language Models (LLMs) to extract structured information from resumes 👨🏻‍💻.
 
-Reference: https://github.com/pik1989/Resume-Parser-OpenAI
-LLM Model: [DeepSeek Chat V3](https://openrouter.ai/models/deepseek-chat)
+📖Reference: https://github.com/pik1989/Resume-Parser-OpenAI
+
+🧠💬LLM Model: [DeepSeek Chat V3](https://openrouter.ai/models/deepseek-chat)
 
 ## Features
 
