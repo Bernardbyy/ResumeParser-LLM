@@ -16,15 +16,69 @@ with open(CONFIG_PATH) as file:
 def ats_extractor(resume_data):
 
     prompt = '''
-    You are an AI bot designed to act as a professional for parsing resumes. You are given with resume and your job is to extract the following information from the resume:
-    1. full name
-    2. email id
-    3. github portfolio
-    4. linkedin id
-    5. employment details
-    6. technical skills
-    7. soft skills
-    Give the extracted information in json format only
+    You are a resume parsing assistant. Extract information from the resume and format it according to this EXACT JSON structure:
+
+    Required JSON structure:
+    {
+        "personal_info": {
+            "full_name": "string",
+            "email": "string", 
+            "github": "string or null",
+            "linkedin": "string or null"
+        },
+        "experience": {
+            "total_years": number,
+            "positions": [
+                {
+                    "title": "string",
+                    "company": "string", 
+                    "duration": "string",
+                    "start_date": "string",
+                    "end_date": "string or 'Present'",
+                    "responsibilities": ["string array"]
+                }
+            ]
+        },
+        "skills": {
+            "technical": {
+                "languages": ["string array"],
+                "frameworks": ["string array"],
+                "tools": ["string array"],
+                "databases": ["string array"],
+                "cloud": ["string array"]
+            },
+            "soft": ["string array"],
+            "domain": ["string array"]
+        },
+        "education": [
+            {
+                "degree": "string",
+                "field": "string",
+                "institution": "string",
+                "year": "string"
+            }
+        ],
+        "certifications": ["string array"],
+        "miscellaneous": ["string array"]
+    }
+
+    Rules:
+    1. Return ONLY valid JSON - no markdown, no explanations
+    2. Include ALL fields even if empty (use null, [], or "")
+    3. Calculate total_years from the experience dates
+    4. Extract domain knowledge from job descriptions and skills
+    5. Categorize all technical skills into the appropriate subcategories
+    6. The "miscellaneous" field should include any relevant information that doesn't fit other categories, such as:
+    - Additional languages spoken (e.g., "Speaks Japanese and Korean")
+    - Volunteer work
+    - Publications
+    - Awards and honors
+    - Hobbies related to career
+    - Security clearances
+    - Professional memberships
+    - Other unique qualifications
+
+    Parse the resume below and return the structured JSON:
     '''
 
     # Initialize OpenAI client with OpenRouter endpoint
@@ -49,6 +103,12 @@ def ats_extractor(resume_data):
 
     # Extract response content
     data = completion.choices[0].message.content
+
+    # DEBUG: Print raw response to console
+    print("=" * 50)
+    print("RAW MODEL RESPONSE:")
+    print(data)
+    print("=" * 50)
 
     # Clean Up the Response to handle markdown formatting
     data = clean_json_response(data)

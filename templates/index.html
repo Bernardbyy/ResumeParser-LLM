@@ -45,7 +45,8 @@
         <div class="max-w-4xl mx-auto text-center mb-12">
             <h1 class="text-4xl font-extrabold text-white sm:text-5xl">
                 <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500">
-                    Resume Parser w/ DeepSeek-V3-0324
+                    Technical Resume Parser w/ 
+                    DeepSeek-V3-0324
                 </span>
             </h1>
             <p class="mt-3 max-w-md mx-auto text-base text-gray-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
@@ -169,54 +170,56 @@
                 let html = '';
                 
                 // Personal info section
-                html += `
-                    <div class="mb-8">
-                        <h3 class="text-lg font-semibold text-indigo-400 mb-3 pb-2 border-b border-slate-700">
-                            <i class="fas fa-user mr-2"></i> Personal Information
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                `;
-                
-                if (data.full_name) {
-                    html += createInfoItem('Name', data.full_name, 'user');
-                }
-                
-                if (data.email_id) {
-                    html += createInfoItem('Email', data.email_id, 'envelope');
-                }
-                
-                if (data.github_portfolio) {
-                    html += createInfoItem('GitHub', 
-                        `<a href="${data.github_portfolio}" class="text-indigo-400 hover:underline" target="_blank">${data.github_portfolio}</a>`, 
-                        'code-branch');
-                }
-                
-                if (data.linkedin_id) {
-                    html += createInfoItem('LinkedIn', 
-                        `<a href="${data.linkedin_id}" class="text-indigo-400 hover:underline" target="_blank">${data.linkedin_id}</a>`, 
-                        'linkedin');
-                }
-                
-                html += `
-                        </div>
-                    </div>
-                `;
-                
-                // Employment History
-                if (data.employment_details && data.employment_details.length > 0) {
+                if (data.personal_info) {
                     html += `
                         <div class="mb-8">
                             <h3 class="text-lg font-semibold text-indigo-400 mb-3 pb-2 border-b border-slate-700">
-                                <i class="fas fa-briefcase mr-2"></i> Employment History
+                                <i class="fas fa-user mr-2"></i> Personal Information
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    `;
+                    
+                    if (data.personal_info.full_name) {
+                        html += createInfoItem('Name', data.personal_info.full_name, 'user');
+                    }
+                    
+                    if (data.personal_info.email) {
+                        html += createInfoItem('Email', data.personal_info.email, 'envelope');
+                    }
+                    
+                    if (data.personal_info.github) {
+                        html += createInfoItem('GitHub', 
+                            `<a href="${data.personal_info.github}" class="text-indigo-400 hover:underline" target="_blank">${data.personal_info.github}</a>`, 
+                            'code-branch');
+                    }
+                    
+                    if (data.personal_info.linkedin) {
+                        html += createInfoItem('LinkedIn', 
+                            `<a href="${data.personal_info.linkedin}" class="text-indigo-400 hover:underline" target="_blank">${data.personal_info.linkedin}</a>`, 
+                            'linkedin');
+                    }
+                    
+                    html += `
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Experience Section
+                if (data.experience && data.experience.positions) {
+                    html += `
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-indigo-400 mb-3 pb-2 border-b border-slate-700">
+                                <i class="fas fa-briefcase mr-2"></i> Experience (${data.experience.total_years} years)
                             </h3>
                             <div class="space-y-6">
                     `;
                     
-                    data.employment_details.forEach(job => {
+                    data.experience.positions.forEach(job => {
                         html += `
                             <div class="bg-slate-700/30 rounded-lg p-4">
                                 <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
-                                    <h4 class="text-white font-medium">${job.position || 'Position'}</h4>
+                                    <h4 class="text-white font-medium">${job.title || 'Position'}</h4>
                                     <span class="text-gray-400 text-sm">${job.duration || 'Duration'}</span>
                                 </div>
                                 <div class="text-indigo-300 text-sm mb-3">${job.company || 'Company'}</div>
@@ -240,70 +243,101 @@
                 }
                 
                 // Skills section
-                if (data.technical_skills || data.soft_skills) {
+                if (data.skills) {
                     html += `
-                        <div class="mb-4">
+                        <div class="mb-8">
                             <h3 class="text-lg font-semibold text-indigo-400 mb-3 pb-2 border-b border-slate-700">
                                 <i class="fas fa-laptop-code mr-2"></i> Skills
                             </h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     `;
                     
-                    // Technical skills
-                    if (data.technical_skills) {
-                        Object.keys(data.technical_skills).forEach(category => {
-                            if (!data.technical_skills[category]) return;
-                            
-                            const skills = Array.isArray(data.technical_skills[category]) ? 
-                                data.technical_skills[category] : 
-                                [data.technical_skills[category]];
-                            
-                            if (skills.length === 0) return;
-                            
-                            html += `
-                                <div class="bg-slate-700/30 rounded-lg p-4">
-                                    <h4 class="text-white font-medium mb-2">${formatCategoryName(category)}</h4>
-                                    <div class="flex flex-wrap gap-2">
-                            `;
-                            
-                            skills.forEach(skill => {
-                                if (skill) {
-                                    html += `<span class="bg-indigo-900/50 text-indigo-300 text-xs px-2 py-1 rounded">${skill}</span>`;
-                                }
-                            });
-                            
-                            html += `
-                                    </div>
-                                </div>
-                            `;
-                        });
+                    // Technical Skills
+                    if (data.skills.technical) {
+                        html += `<div class="mb-6">
+                            <h4 class="text-md font-semibold text-indigo-300 mb-3">Technical Skills</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        `;
+                        
+                        // Programming Languages
+                        if (data.skills.technical.languages && data.skills.technical.languages.length > 0) {
+                            html += createSkillCategory('Languages', data.skills.technical.languages, 'bg-blue-900/50 text-blue-300');
+                        }
+                        
+                        // Frameworks
+                        if (data.skills.technical.frameworks && data.skills.technical.frameworks.length > 0) {
+                            html += createSkillCategory('Frameworks', data.skills.technical.frameworks, 'bg-green-900/50 text-green-300');
+                        }
+                        
+                        // Tools
+                        if (data.skills.technical.tools && data.skills.technical.tools.length > 0) {
+                            html += createSkillCategory('Tools', data.skills.technical.tools, 'bg-purple-900/50 text-purple-300');
+                        }
+                        
+                        // Databases
+                        if (data.skills.technical.databases && data.skills.technical.databases.length > 0) {
+                            html += createSkillCategory('Databases', data.skills.technical.databases, 'bg-orange-900/50 text-orange-300');
+                        }
+                        
+                        // Cloud
+                        if (data.skills.technical.cloud && data.skills.technical.cloud.length > 0) {
+                            html += createSkillCategory('Cloud', data.skills.technical.cloud, 'bg-red-900/50 text-red-300');
+                        }
+                        
+                        html += `</div></div>`;
                     }
                     
-                    // Soft skills
-                    if (data.soft_skills) {
-                        const softSkills = Array.isArray(data.soft_skills) ? 
-                            data.soft_skills : 
-                            [data.soft_skills];
+                    // Domain Knowledge
+                    if (data.skills.domain && data.skills.domain.length > 0) {
+                        html += `
+                            <div class="mb-6">
+                                <h4 class="text-md font-semibold text-indigo-300 mb-3">Domain Knowledge</h4>
+                                <div class="flex flex-wrap gap-2">
+                        `;
                         
-                        if (softSkills.length > 0 && softSkills[0]) {
-                            html += `
-                                <div class="bg-slate-700/30 rounded-lg p-4">
-                                    <h4 class="text-white font-medium mb-2">Soft Skills</h4>
-                                    <div class="flex flex-wrap gap-2">
-                            `;
-                            
-                            softSkills.forEach(skill => {
-                                if (skill) {
-                                    html += `<span class="bg-purple-900/50 text-purple-300 text-xs px-2 py-1 rounded">${skill}</span>`;
-                                }
-                            });
-                            
-                            html += `
-                                    </div>
-                                </div>
-                            `;
-                        }
+                        data.skills.domain.forEach(skill => {
+                            html += `<span class="bg-teal-900/50 text-teal-300 text-sm px-3 py-1 rounded-full">${skill}</span>`;
+                        });
+                        
+                        html += `</div></div>`;
                     }
+                    
+                    // Soft Skills
+                    if (data.skills.soft && data.skills.soft.length > 0) {
+                        html += `
+                            <div class="mb-6">
+                                <h4 class="text-md font-semibold text-indigo-300 mb-3">Soft Skills</h4>
+                                <div class="flex flex-wrap gap-2">
+                        `;
+                        
+                        data.skills.soft.forEach(skill => {
+                            html += `<span class="bg-pink-900/50 text-pink-300 text-sm px-3 py-1 rounded-full">${skill}</span>`;
+                        });
+                        
+                        html += `</div></div>`;
+                    }
+                    
+                    html += `</div>`;
+                }
+                
+                // Education Section
+                if (data.education && data.education.length > 0) {
+                    html += `
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-indigo-400 mb-3 pb-2 border-b border-slate-700">
+                                <i class="fas fa-graduation-cap mr-2"></i> Education
+                            </h3>
+                            <div class="space-y-4">
+                    `;
+                    
+                    data.education.forEach(edu => {
+                        html += `
+                            <div class="bg-slate-700/30 rounded-lg p-4">
+                                <h4 class="text-white font-medium">${edu.degree}</h4>
+                                <div class="text-indigo-300 text-sm">${edu.field} - ${edu.institution}</div>
+                                <div class="text-gray-400 text-sm mt-1">${edu.year}</div>
+                            </div>
+                        `;
+                    });
                     
                     html += `
                             </div>
@@ -311,7 +345,61 @@
                     `;
                 }
                 
+                // Certifications Section
+                if (data.certifications && data.certifications.length > 0) {
+                    html += `
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-indigo-400 mb-3 pb-2 border-b border-slate-700">
+                                <i class="fas fa-certificate mr-2"></i> Certifications
+                            </h3>
+                            <ul class="list-disc pl-5 space-y-2">
+                    `;
+                    
+                    data.certifications.forEach(cert => {
+                        html += `<li class="text-gray-300">${cert}</li>`;
+                    });
+                    
+                    html += `
+                            </ul>
+                        </div>
+                    `;
+                }
+                
+                // Miscellaneous Section
+                if (data.miscellaneous && data.miscellaneous.length > 0) {
+                    html += `
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-indigo-400 mb-3 pb-2 border-b border-slate-707">
+                                <i class="fas fa-plus-circle mr-2"></i> Additional Information
+                            </h3>
+                            <ul class="list-disc pl-5 space-y-2">
+                    `;
+                    
+                    data.miscellaneous.forEach(item => {
+                        html += `<li class="text-gray-300">${item}</li>`;
+                    });
+                    
+                    html += `
+                            </ul>
+                        </div>
+                    `;
+                }
+                
                 resumeContainer.innerHTML = html;
+            }
+
+            // Add this helper function for skill categories
+            function createSkillCategory(title, skills, colorClass) {
+                return `
+                    <div class="bg-slate-700/30 rounded-lg p-4">
+                        <h5 class="text-white font-medium mb-2">${title}</h5>
+                        <div class="flex flex-wrap gap-2">
+                            ${skills.map(skill => 
+                                `<span class="${colorClass} text-xs px-2 py-1 rounded">${skill}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
             }
             
             function createInfoItem(label, value, icon) {

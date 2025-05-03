@@ -1,0 +1,202 @@
+# This Text File Contains the 5 Common Job Descriptions used to hired a Data Professional (Sourced From Linkedin)
+
+Okay I want to get started on this, I think we should start by defining the categories? Here are some of the job descriptions that I found on linkedin, maybe we can derive some common categories from these descriptions. I am thinking that this can be turned into a useful tool for me to use when applying for different jobs role in the realm of data science. 
+
+Job 1: 
+About the job
+MoneyLion is a leader in financial technology powering the next generation of personalized products and content, with a top consumer finance super app, a premier embedded finance platform for enterprise businesses and a world-class media arm. MoneyLion’s mission is to give everyone the power to make their best financial decisions. We pride ourselves on serving the many, not the few; providing confidence through guidance, choice, personalization; and shortening the distance to an informed action.
+
+In our go-to money app for consumers, we deliver curated content on finance and related topics, through a tailored feed that engages people to learn and share. People take control of their finances with our innovative financial products and marketplace - including our full-fledged suite of features to save, borrow, spend, and invest - seamlessly bringing together the best offers and content from MoneyLion and our 1,100+ Enterprise Partner network, together in one experience. MoneyLion’s enterprise technology provides the definitive search engine and marketplace for financial products, enabling any company to add embedded finance to their business, with advanced AI-backed data and tools through our platform and API. Established in 2013, MoneyLion connects millions of people with the financial products and content they need, when and where they need it.
+About The Role
+The Kuala Lumpur office is the technology powerhouse of MoneyLion. We pride ourselves on innovative initiatives and thrive in a fast-paced and challenging environment. Join our multicultural team of visionaries and industry rebels in disrupting the traditional finance industry!
+We are looking for an LLM Engineer to develop and optimize AI models specifically within the domain of large language models that will enable us to innovate and deliver generative AI applications.
+As an LLM Engineer, you will have the opportunity to leverage Large Language Models (LLMs) and state-of-the-art techniques to deliver on Generative AI (GenAI) use cases. You will play a critical role in deploying, optimizing, and scaling GenAI applications to ensure they perform efficiently and reliably in a production environment. This position offers the opportunity to work closely with Applied Scientists, Data Scientists, and Product teams to bring cutting-edge GenAI solutions to life and scale them to handle ever increasing load.
+This article goes over how we envision our LLM Application Stack to look like in the future, in which this role will be responsible for integrating and improving it over time.
+
+Key Responsibilities
+Design, implement, and maintain robust, scalable, and efficient GenAI application infrastructure
+Deploy LLMs and other Machine Learning models into production, ensuring high availability and performance
+Develop and maintain caching layers to optimize the performance of GenAI applications
+Implement monitoring and logging systems to track model performance and system health
+Collaborate with Data Scientists to integrate models into existing systems and workflows
+Optimize model inference times and resource utilization to handle large-scale data efficiently
+Ensure best practices in Software Engineering, including testing, CI/CD, clean code are applied to Machine Learning projects
+Work with cross-functional teams to understand business requirements and translate them into technical solutions
+Troubleshoot and resolve issues related to model deployment and system integration
+Stay updated with the latest advancements in GenAI, machine learning infrastructure, and distributed system
+
+About You
+
+Strong background in software engineering with a focus on machine learning infrastructure
+Proficient in deploying, scaling, and optimizing Machine Learning models in a production environment
+Solid understanding of distributed systems, microservices architecture, and cloud platforms (e.g., AWS, GCP, Azure)
+Hands-on experience with containerization technologies like Docker and orchestration tools like Kubernetes
+Proficient in Python and experience with other programming languages such as Java, C++, or Go is a plus
+Strong knowledge of CI/CD pipelines, coding best practices, version control systems, and DevOps practices
+Familiarity with GenAI technologies and frameworks, and a keen interest in their development and application
+Excellent problem-solving skills and ability to work independently on projects from end-to-end
+Strong verbal and written communication skills to effectively collaborate with cross-functional teams and stakeholders
+Have a growth mindset where you always want and try to improve processes/systems for the better
+Able to work end-to-end from ideation all the way to execution with minimal supervisior
+
+What's Next...
+
+After you submit your application, you can expect the following steps in the recruitment process:
+
+Online Technical Test
+Take-Home Assessment
+Interview & Discussion of Take-Home Assessment - Hiring Manager (Virtual or face-to-face)
+
+*If you’ve already sent in your application for this position and were not selected, please re-apply after 6 months.*
+
+What We Value
+We value growth-minded and collaborative people with high learning agility who embody our core values of teamwork, customer-first and innovation. Every member of the MoneyLion Team is passionate about fintech and ready to give 100% in helping us achieve our mission.
+Working At MoneyLion
+
+At MoneyLion, we want you to be well and thrive. Our generous benefits package includes:
+Competitive salary packages 
+Comprehensive medical, dental, vision and life insurance benefits
+Wellness perks
+Paid parental leave
+Generous Paid Time Off
+Learning and Development resources
+Flexible working hours 
+
+MoneyLion is committed to equal employment opportunities for all employees. Inside our company, every decision we make regarding our employees is based on merit, competence, and performance, completely free of discrimination. We are committed to building a team that represents a variety of backgrounds, perspectives, and skills. Within that team, no one will feel more “other” than anyone else. We realize the full promise of diversity and want you to bring your whole self to work every single day.
+
+Job 2: 
+About the job
+Job Brief As a Machine Learning Engineer at Finexus Sdn Bhd, you will be responsible for leading and contributing to the development of advanced machine learning models and algorithms to solve complex problems and drive innovation in our field. You will collaborate with cross-functional teams and play a critical role in designing, developing, and implementing machine learning solutions to support our company's objectives. This is an opportunity to make a significant impact and shape the future of the company’s AI-driven products and services. Job Responsibilities
+* Contribute to the design, development, and deployment of AI-driven products and solutions.
+* Collaborate with cross-functional teams to identify business opportunities and translate them into AI projects.
+* Research, evaluate, and adopt state-of-the-art AI technologies to improve existing processes and develop new capabilities. This includes the full ML development technical stack, from Data Science to MLOps.
+* Provide technical leadership and mentorship to junior team members, fostering a culture of continuous learning and growth.
+* Architect scalable and robust AI systems, ensuring performance, reliability, and security.
+* Ensure effective communication of technical concepts and project updates to both technical and non-technical stakeholders.
+* Contribute to the data security infrastructure that keeps AI development safe, compliant and respecting data privacy laws.
+Job Requirements
+* Master's in Computer Science.
+* Knowledge of computer vision and natural language processing (NLP).
+* Familiarity with Docker containerization.
+* Familiarity with Apache Airflow and mlflow.
+* Bachelor's degree in Computer Science, preferably with a focus on Machine Learning.
+* Proven experience at least 2 years in AI, machine learning, or related technical roles.
+* Strong programming skills in Python and Java
+* In-depth understanding of AI algorithms, neural networks, and deep learning techniques.
+* Hands-on experience with designing and implementing AI models and applications.
+* Familiar with AI libraries such as Tensorflow, PyTorch, OpenCV, kornia, scikit-learn, ONNX etc.
+* Familiar with relational DBs e.g PostgreSQL database.
+* Familiar with version control systems such as Git and SVN.
+* Familiar with Python frameworks such as FastAPI.
+* Familiar with Linux operating systems
+
+Job 3: 
+About the job
+Summary Of Responsibilities As a Data Resiliency Engineer, you will be at the forefront of maintaining and enhancing the robustness of our data infrastructure. You will analyze issues to identify root causes and implement solutions that ensure a seamless user experience. Your expertise in data ecosystem monitoring, incident management, and data quality enhancement will play a pivotal role in maintaining operational excellence. You will utilize advanced tools like Datadog and Opsgenie to proactively monitor and resolve issues, act as a subject matter expert for data-related inquiries, and champion data quality initiatives. Additionally, you will work closely with the team to ensure our suite of payments reporting systems for participants as well as PayNet internal reports, are accurate and aligned with evolving organizational needs, driving continuous improvement in our data-driven operations. Key Areas Of Responsibilities
+* Root Cause Analysis & Bug Fixing: Analyze issues to uncover root causes and implement effective solutions, ensuring a smooth user experience.
+* Data Ecosystem Monitoring: Oversee the data environment using advanced monitoring tools like Datadog, proactively identifying and addressing issues before they escalate.
+* Alert System Management: Collaborate with the team managing Opsgenie and other alert systems, ensuring timely responses to critical incidents and maintaining operational excellence.
+* Data Lake Support: Serve as the primary contact for data-related inquiries, including ETL incident management, reporting challenges, and providing actionable insights.
+* Data Quality Monitoring: Own and enhance data quality monitoring tools, designing robust pipelines and frameworks to maintain the highest data integrity standards.
+* Reporting Management: Lead report amendments and ensure reporting processes are accurate and meet the evolving needs of the organization.
+Qualifications & Experience Minimum Qualifications
+* Bachelor's degree in Computer Science, Engineering, Information Systems, or a related field.
+* Strong experience with AWS data services (e.g., S3, Glue, Athena, Quicksight, Lambda).
+* Strong experience in Python programming language
+* Proficiency in PySpark for large-scale data processing.
+* Familiarity with workflow management tools (e.g., Apache Airflow)
+* Familiarity with operating data tools on Kubernetes and EKS
+* Expertise in monitoring tools (e.g., Datadog, CloudWatch) to proactively track and resolve issues.
+* Experience with alert management systems like Opsgenie or similar platforms.
+* Strong understanding of data lakes and managing large-scale data environments.
+* Experience in performing root cause analysis for complex data issues and implementing effective bug fixes.
+* Terraform or other IaC tools for infrastructure provisioning
+* Relevant certifications in AWS and data engineering
+PERSONAL QUALITIES
+* Self-motivated problem solver who can work with minimal guidance
+* Excellent communication skills to articulate technical details clearly to non-technical stakeholders.
+* Detail-oriented with a focus on data quality and reliability
+* Proven ability to work cross-functionally with multiple teams (e.g., Data Engineering, Operations, Analytics).
+* Passionate engineer looking to learn new technologies
+
+Job 4:
+About the job
+Get To Know Our GX Bank Team
+
+GX Bank Berhad - the Grab-led Digital Bank - is the FIRST digital bank in Malaysia, approved by BNM to commence operations. We aim to leverage technology and innovation to serve the financial needs of the unserved and underserved individuals, and micro and small medium enterprises.
+
+We are driven by our shared purpose and passion to bring positive transformation to the banking industry, starting with solutions that address the financial struggles of Malaysians and businesses.
+
+Get To Know The Role
+
+Develop and deploy analytical solutions and dashboards for management and business teams across the Digibank's regional footprint, to enable data-driven decision-making. These solutions must be adaptable to the diverse business functions and regulatory environments of each country, and support areas including customer acquisition, customer retention, product development, pricing decisions, credit risk, and fraud identification for both retail and wholesale banking customers.
+Uncover and deliver actionable insights, trends and product recommendations to support the business, through dashboards and advanced visualisation techniques.
+Conduct both historical and predictive analyses and convert into digestible, readable, and publicly-available insights.
+Develop analytic tools to help the data team and other disciplines be more effective in debugging, data summarisation and analysis of results.
+Write SQL scripts for data transformation.
+Ensure data accuracy and good segmentation of data sets for tactical data mining.
+Taking on the responsibilities as a Technical Project Manager to drive projects, by partnering closely with the broader business, product, engineering and marketing teams to define requirements, design and analyse experiments that drive key product designs and marketing decisions.
+Design and develop Generative AI solutions to enhance data analysis and BI solutions.
+Creating data products which can be readily used by partners and business units across the bank.
+Act as the liaison officer between business units across the countries within the region and Data Engineering team on curating the data to be stored in a database and then used for dash-boarding.
+Thrive on sharing knowledge with others and helping collaborators grow to foster a positive and productive work environment.
+
+Must Haves
+
+2-3 years related working experience in end-to-end dashboard development life cycle
+Bachelors or Masters degree in Statistics, Analytics, Economics, Mathematics, Engineering or other quantitative subjects
+Advanced in SQL, must have hands-on experience with Tableau and Python (optional)
+Familiar with Airflow and DAGs to automate and schedule data pipeline tasks and workflows
+Good to have experience on tools such as dbt, Presto, Hive, and Data Visualisation platforms like Power BI/D3.js
+Solid experience in reporting to management in delivering analyses and reports
+Experience with designing, running and analysing A/B tests and product experiments with a good understanding of hypothesis testing and the basic principles of Design of Experiment.
+Expertise in data retrieval, data modelling (both logical and physical), data warehouse design.
+Passionate about solving problems – possesses a relentless need for investigation and data exploration.
+Results and detail-oriented, with strong intuitions on how to solve problems creatively and quickly.
+Ability to distill data and articulate an actionable point of view to non-technical audiences and senior stakeholders using presentations, interactive visualisations, et al
+Strong business acumen, inherent curiosity about data, stakeholder management and project management skills to prioritise & manage multiple priorities in a fast-paced and multidisciplinary environment
+Highly self-driven, demonstrate critical thinking, team player & fast learner
+Work experience and knowledge of more than one domain is a plus - Risk Analytics, Marketing Analytics, Retail analytics, Fraud analytics etc.
+Added bonus with Generative AI skillet
+
+Job 5: 
+About the job
+Job Summary
+
+We are looking for a dynamic and results-driven AI Ops Engineer to join our AI & Automation team. The ideal candidate will play a pivotal role in enabling and managing production environments for our GenAI products, ensuring seamless deployment, scalability, and performance optimization. You will collaborate with cross-functional teams to integrate AI solutions into production, monitor their performance, and implement automation to streamline operational workflows.
+
+Responsibilities
+
+Production Environment Enablement: Design, implement, and manage production environments for GenAI products, ensuring high availability, scalability, and security. Establish CI/CD pipelines to automate deployment and updates of AI models and services.
+AI & ML Integration: Collaborate with Data Scientists and ML Engineers to transition AI models from development to production. Optimize model performance and ensure efficient resource utilization in a production setting.
+Monitoring & Performance Optimization: Develop and maintain monitoring tools to track AI product performance, availability, and reliability. Implement automated alerting systems to detect and resolve issues proactively.
+Automation & Process Improvement: Automate operational workflows to reduce manual intervention and improve system reliability. Leverage AI Ops platforms to optimize system health and performance.
+Collaboration & Stakeholder Engagement: Work closely with Enterprise Architects and IT Operations teams to ensure AI solutions align with the company’s strategic goals. Engage with external partners like Amazon Bedrock to customize AI models and integrate them into the production environment.
+Security & Compliance: Ensure data security, privacy, and compliance with industry standards and regulatory requirements. Implement robust security protocols to safeguard AI models and data.
+
+Requirements
+
+Bachelor’s degree in Computer Science, Data Science, Telecommunications, or a related field.
+2-4 years of experience in AI Ops, IT operations, or production environment management.
+Proficiency in cloud platforms (AWS, Azure) and AI Ops tools (Moogsoft, Splunk, Datadog).
+Strong knowledge of AI/ML deployment frameworks (TensorFlow Serving, MLflow) and containerization tools (Docker, Kubernetes).
+Experience with CI/CD pipelines and infrastructure as code (Terraform, Ansible).
+Familiarity with Amazon Bedrock or similar platforms for AI model customization.
+Excellent problem-solving skills and the ability to troubleshoot complex production issues.
+Experience with Generative AI applications in a production environment.
+Knowledge of DevOps practices and site reliability engineering (SRE) principles.
+Strong understanding of network infrastructure and security best practices.
+Excellent communication and collaboration skills.
+Next Steps
+
+Thank you for taking the first step towards joining our team at CelcomDigi! After submitting your application, our Talent Acquisition team will review your CV and reach out to shortlisted candidates to guide you through the next steps, including a pre-screening conversation, interviews and or assessments.
+
+At CelcomDigi, your work has the power to shape the future. As Malaysia’s leading Telco-Tech company, we are driving the nation’s digital transformation with 5G and AI, impacting over 20 million customers, enabling businesses to thrive, connecting communities, and advancing the nation.
+
+Aligned with our employer value proposition “Grow with Purpose. Build with Trust.”, you will have the opportunity to innovate responsibly, creating products and services that advance society. Together, we are building Malaysia’s most trusted and responsible brand.
+
+We look forward to advancing and inspiring Malaysia together with you #WeAreCelcomDigi
+
+Follow CelcomDigi on LinkedIn and vote for us as Malaysia’s Most Preferred Employer at the GRADUAN Brand Awards.
+
+CelcomDigi is an equal opportunity employer, and committed to promote employment practices that are transparent, objective and fair.

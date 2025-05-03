@@ -1,0 +1,14 @@
+Categories Derived From Analysis of 5 Data Professional Job Descriptions: 
+1. Technical Skills
+2. Domain Knowledge
+3. Experience Requirements
+4. Soft Skills
+5. Job Responsibilities
+
+Job Description Category -> Resume Extracted Information 
+
+1. Technical Skills         -> "technical_skills"
+2. Domain Knowledge         -> "technical_skills.interest" + "employment_details" 
+3. Experience Requirements  -> "employment_details"
+4. Soft Skills              -> "soft_skills"
+5. Job Responsibilities     -> "ememployment_details[].responsibilities"
