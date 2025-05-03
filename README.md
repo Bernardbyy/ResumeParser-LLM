@@ -4,7 +4,7 @@ A Flask-based web application that uses Large Language Models (LLMs) to extract 
 
 📖Reference: https://github.com/pik1989/Resume-Parser-OpenAI
 
-🧠💬LLM Model: [DeepSeek-V3-0324 (March 2025)](https://openrouter.ai/models/deepseek-chat)
+🧠💬LLM Model: [DeepSeek-V3-0324 (March 2025)](https://openrouter.ai/deepseek/deepseek-chat-v3-0324:free)
 
 ## Features
 
@@ -17,7 +17,7 @@ A Flask-based web application that uses Large Language Models (LLMs) to extract 
 
 - **Backend**: Python, Flask
 - **PDF Processing**: PyPDF
-- **LLM Integration**: OpenRouter API (with [DeepSeek-V3-0324 (March 2025)](https://openrouter.ai/models/deepseek-chat) model)
+- **LLM Integration**: OpenRouter API (with [DeepSeek-V3-0324 (March 2025)](https://openrouter.ai/deepseek/deepseek-chat-v3-0324:freet) model)
 - **Frontend**: HTML, Tailwind CSS, JavaScript
 
 ## Setup Instructions
