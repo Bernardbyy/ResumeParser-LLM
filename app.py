@@ -3,7 +3,7 @@ import os, sys
 from flask import Flask, request, render_template
 from pypdf import PdfReader 
 import json
-from resumeparser import ats_extractor
+from resumeparser import ats_extractor, job_description_extractor
 
 sys.path.insert(0, os.path.abspath(os.getcwd()))
 
@@ -22,23 +22,32 @@ def ats():
     doc = request.files['pdf_doc']
     doc.save(os.path.join(UPLOAD_PATH, "file.pdf"))
     doc_path = os.path.join(UPLOAD_PATH, "file.pdf")
-    data = _read_file_from_path(doc_path)
-    data = ats_extractor(data)
-
-    # Add more robust error handling
+    
+    # Extract resume data
+    resume_text = _read_file_from_path(doc_path)
+    resume_data = ats_extractor(resume_text)
+    
+    # Get job description if provided
+    job_description = request.form.get('job_description', '')
+    job_data = None
+    
+    if job_description.strip():  # If job description is provided
+        job_data = job_description_extractor(job_description)
+    
+    # Process both results
     try:
-        parsed_data = json.loads(data)
-        return render_template('index.html', data=parsed_data)
+        parsed_resume = json.loads(resume_data)
+        parsed_job = json.loads(job_data) if job_data else None
+        
+        return render_template('index.html', 
+                             resume_data=parsed_resume,
+                             job_data=parsed_job)
     except json.JSONDecodeError as e:
-        # Try to parse the error message to find the problematic part
+        # Handle errors...
         error_message = {
-            "error": f"Failed to parse JSON response from the model: {str(e)}",
-            "raw_response": data,
-            "debug_info": {
-                "error_position": e.pos if hasattr(e, 'pos') else None,
-                "error_line": e.lineno if hasattr(e, 'lineno') else None,
-                "error_column": e.colno if hasattr(e, 'colno') else None
-            }
+            "error": f"Failed to parse JSON response: {str(e)}",
+            "resume_raw": resume_data if 'resume_data' in locals() else None,
+            "job_raw": job_data if 'job_data' in locals() else None
         }
         return render_template('index.html', data=error_message)
  

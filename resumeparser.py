@@ -18,7 +18,7 @@ def ats_extractor(resume_data):
     prompt = '''
     You are a resume parsing assistant. Extract information from the resume and format it according to this EXACT JSON structure:
 
-    Required JSON structure:
+    Required JSON structure (PAY ATTENTION TO PLURAL FORMS):
     {
         "personal_info": {
             "full_name": "string",
@@ -28,23 +28,23 @@ def ats_extractor(resume_data):
         },
         "experience": {
             "total_years": number,
-            "positions": [
+            "positions": [  # NOTE: "positions" is PLURAL
                 {
                     "title": "string",
                     "company": "string", 
                     "duration": "string",
                     "start_date": "string",
                     "end_date": "string or 'Present'",
-                    "responsibilities": ["string array"]
+                    "responsibilities": ["string array"]  # NOTE: "responsibilities" is PLURAL
                 }
             ]
         },
-        "skills": {
+        "skills": {  # NOTE: "skills" is PLURAL
             "technical": {
-                "languages": ["string array"],
-                "frameworks": ["string array"],
-                "tools": ["string array"],
-                "databases": ["string array"],
+                "languages": ["string array"],  # NOTE: PLURAL
+                "frameworks": ["string array"],  # NOTE: PLURAL
+                "tools": ["string array"],  # NOTE: PLURAL
+                "databases": ["string array"],  # NOTE: PLURAL
                 "cloud": ["string array"]
             },
             "soft": ["string array"],
@@ -58,9 +58,10 @@ def ats_extractor(resume_data):
                 "year": "string"
             }
         ],
-        "certifications": ["string array"],
+        "certifications": ["string array"],  # NOTE: PLURAL
         "miscellaneous": ["string array"]
     }
+
 
     Rules:
     1. Return ONLY valid JSON - no markdown, no explanations
@@ -115,6 +116,90 @@ def ats_extractor(resume_data):
 
     return data #Returns structured JSON data
 
+def job_description_extractor(job_description_text):
+    prompt = '''
+    You are a job description parsing assistant. Extract information from the job description and format it according to this EXACT JSON structure:
+
+    Required JSON structure:
+    {
+        "job_info": {
+            "title": "string",
+            "company": "string or null",
+            "location": "string or null",
+            "type": "string or null"
+        },
+        "technical_skills": {
+            "required": ["string array"],
+            "languages": ["string array"],
+            "frameworks": ["string array"],
+            "tools": ["string array"],
+            "databases": ["string array"],
+            "cloud": ["string array"]
+        },
+        "domain_knowledge": {
+            "required": ["string array"]
+        },
+        "experience_requirements": {
+            "minimum_years": number or null,
+            "required_education": ["string array"],
+            "specific_experience": ["string array"]
+        },
+        "soft_skills": {
+            "required": ["string array"]
+        },
+        "job_responsibilities": {
+            "primary": ["string array"],
+            "secondary": ["string array"]
+        }
+    }
+
+    Rules:
+    1. Return ONLY valid JSON - no markdown, no explanations
+    2. Include ALL fields even if empty (use null, [], or "")
+    3. Only extract required skills and requirements, ignore preferred/nice-to-have items
+    4. Extract specific technical skills and categorize them appropriately
+    5. Identify domain-specific knowledge requirements
+    6. Parse experience requirements including years and specific types
+    7. Extract required soft skills only
+    8. Separate primary/core responsibilities from secondary ones
+    9. If information is not explicitly stated, use null or empty array
+
+    Parse the job description below and return the structured JSON:
+    '''
+
+    # Initialize OpenAI client with OpenRouter endpoint
+    client = OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key = api_key,
+    )    
+
+    # Create Completion
+    completion = client.chat.completions.create(
+        extra_headers={
+            "X-Title": "Job Description Parser with LLM",
+        },
+        model="deepseek/deepseek-chat-v3-0324:free",
+        messages=[
+            {"role": "system", "content": prompt},
+            {"role": "user", "content": job_description_text}
+        ],
+        temperature=0.1,
+        max_tokens=1500
+    )
+
+    # Extract response content
+    data = completion.choices[0].message.content
+
+    # DEBUG: Print raw response to console
+    print("=" * 50)
+    print("JOB DESCRIPTION RAW RESPONSE:")
+    print(data)
+    print("=" * 50)
+
+    # Clean Up the Response to handle markdown formatting
+    data = clean_json_response(data)
+
+    return data
 
 def clean_json_response(response):
     """Cleans up the response to ensure valid JSON."""

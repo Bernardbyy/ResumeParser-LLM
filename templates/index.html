@@ -32,7 +32,6 @@
                     </div>
                 </div>
                 <div class="flex items-center">
-                    <!-- Re-added GitHub link -->
                     <a href="https://github.com/Bernardbyy/ResumeParser-LLM" target="_blank" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                         <i class="fab fa-github mr-1"></i> GitHub
                     </a>
@@ -58,7 +57,7 @@
             <div class="md:flex">
                 <div class="p-8 w-full">
                     <div class="uppercase tracking-wide text-sm text-indigo-400 font-semibold mb-1">How it works</div>
-                    <p class="text-gray-300 mb-6">Upload your resume in PDF format and our AI will extract key information like personal details, work experience, and skills.</p>
+                    <p class="text-gray-300 mb-6">Upload your resume in PDF format and optionally add a job description for matching analysis.</p>
                     
                     <form action="/process" method="post" enctype="multipart/form-data" class="space-y-4">
                         <div id="upload-area" class="relative border-2 border-dashed border-gray-600 rounded-lg p-6 flex justify-center items-center flex-col">
@@ -83,6 +82,19 @@
                             </div>
                         </div>
 
+                        <div class="mt-6">
+                            <label for="job_description" class="block text-sm font-medium text-gray-300 mb-2">
+                                Job Description (Optional)
+                            </label>
+                            <textarea 
+                                id="job_description" 
+                                name="job_description" 
+                                rows="8" 
+                                class="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-md text-gray-300 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                placeholder="Paste the job description here to get a match score..."
+                            ></textarea>
+                        </div>
+
                         <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transform transition hover:scale-105">
                             <i class="fas fa-magic mr-2"></i> Process Resume
                         </button>
@@ -91,18 +103,46 @@
             </div>
         </div>
 
-        {% if data %}
-        <div id="results" class="max-w-4xl mx-auto bg-slate-800 rounded-xl shadow-xl overflow-hidden mb-12">
-            <div class="px-6 py-4 bg-gradient-to-r from-indigo-600 to-purple-600">
-                <h2 class="text-xl font-semibold text-white flex items-center">
-                    <i class="fas fa-chart-pie mr-2"></i> Results
-                </h2>
+        {% if resume_data or job_data %}
+        <div id="results" class="max-w-4xl mx-auto">
+            {% if resume_data %}
+            <div class="bg-slate-800 rounded-xl shadow-xl overflow-hidden mb-6">
+                <div class="px-6 py-4 bg-gradient-to-r from-indigo-600 to-purple-600">
+                    <h2 class="text-xl font-semibold text-white flex items-center">
+                        <i class="fas fa-file-alt mr-2"></i> Resume Analysis
+                    </h2>
+                </div>
+                <div id="resumeData" class="p-6"></div>
             </div>
-            <div id="resumeData" class="p-6"></div>
+            {% endif %}
+            
+            {% if job_data %}
+            <div class="bg-slate-800 rounded-xl shadow-xl overflow-hidden mb-6">
+                <div class="px-6 py-4 bg-gradient-to-r from-green-600 to-teal-600">
+                    <h2 class="text-xl font-semibold text-white flex items-center">
+                        <i class="fas fa-briefcase mr-2"></i> Job Description Analysis
+                    </h2>
+                </div>
+                <div id="jobData" class="p-6"></div>
+            </div>
+            {% endif %}
+            
+            {% if resume_data and job_data %}
+            <div class="bg-slate-800 rounded-xl shadow-xl overflow-hidden mb-6">
+                <div class="px-6 py-4 bg-gradient-to-r from-yellow-600 to-orange-600">
+                    <h2 class="text-xl font-semibold text-white flex items-center">
+                        <i class="fas fa-chart-bar mr-2"></i> Match Analysis
+                    </h2>
+                </div>
+                <div id="matchScore" class="p-6">
+                    <!-- Match score will be calculated and displayed here -->
+                </div>
+            </div>
+            {% endif %}
         </div>
 
         <script>
-            // Improved file upload display
+            // File upload handling
             document.addEventListener('DOMContentLoaded', function() {
                 const fileInput = document.getElementById('pdf_doc');
                 const uploadPlaceholder = document.getElementById('upload-placeholder');
@@ -110,37 +150,28 @@
                 const selectedFilename = document.getElementById('selected-filename');
                 const changeFileBtn = document.getElementById('change-file');
                 
-                // Function to update the UI when a file is selected
                 function updateFileDisplay() {
                     if (fileInput.files && fileInput.files.length > 0) {
                         const fileName = fileInput.files[0].name;
-                        // Show the selected file UI
                         uploadPlaceholder.classList.add('hidden');
                         fileSelected.classList.remove('hidden');
                         selectedFilename.textContent = fileName;
-                        
-                        // For debugging
                         console.log("File selected:", fileName);
                     } else {
-                        // Show the upload placeholder UI
                         uploadPlaceholder.classList.remove('hidden');
                         fileSelected.classList.add('hidden');
-                        
-                        // For debugging
                         console.log("No file selected");
                     }
                 }
                 
-                // Update display immediately when file is selected
                 fileInput.addEventListener('change', function(e) {
                     console.log("File input change event triggered");
                     updateFileDisplay();
                 });
                 
-                // Handle "Change file" button
                 changeFileBtn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    fileInput.value = ''; // Clear the current selection
+                    fileInput.value = '';
                     uploadPlaceholder.classList.remove('hidden');
                     fileSelected.classList.add('hidden');
                     fileInput.click();
@@ -150,7 +181,6 @@
             function displayResumeData(data) {
                 var resumeContainer = document.getElementById("resumeData");
                 
-                // Handle error display
                 if (data.error) {
                     resumeContainer.innerHTML = `
                         <div class="bg-red-900/30 border border-red-500 text-red-200 px-4 py-3 rounded mb-4">
@@ -166,7 +196,6 @@
                     return;
                 }
                 
-                // Create sections
                 let html = '';
                 
                 // Personal info section
@@ -258,27 +287,24 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         `;
                         
-                        // Programming Languages
+                        // Fix: Changed from data.skills.technical.language to data.skills.technical.languages
+                        // and from data.skill.technical.language to data.skills.technical.languages
                         if (data.skills.technical.languages && data.skills.technical.languages.length > 0) {
                             html += createSkillCategory('Languages', data.skills.technical.languages, 'bg-blue-900/50 text-blue-300');
                         }
                         
-                        // Frameworks
                         if (data.skills.technical.frameworks && data.skills.technical.frameworks.length > 0) {
                             html += createSkillCategory('Frameworks', data.skills.technical.frameworks, 'bg-green-900/50 text-green-300');
                         }
                         
-                        // Tools
                         if (data.skills.technical.tools && data.skills.technical.tools.length > 0) {
                             html += createSkillCategory('Tools', data.skills.technical.tools, 'bg-purple-900/50 text-purple-300');
                         }
                         
-                        // Databases
                         if (data.skills.technical.databases && data.skills.technical.databases.length > 0) {
                             html += createSkillCategory('Databases', data.skills.technical.databases, 'bg-orange-900/50 text-orange-300');
                         }
                         
-                        // Cloud
                         if (data.skills.technical.cloud && data.skills.technical.cloud.length > 0) {
                             html += createSkillCategory('Cloud', data.skills.technical.cloud, 'bg-red-900/50 text-red-300');
                         }
@@ -294,6 +320,7 @@
                                 <div class="flex flex-wrap gap-2">
                         `;
                         
+                        // Fix: Changed from data.skill.domain to data.skills.domain
                         data.skills.domain.forEach(skill => {
                             html += `<span class="bg-teal-900/50 text-teal-300 text-sm px-3 py-1 rounded-full">${skill}</span>`;
                         });
@@ -309,6 +336,7 @@
                                 <div class="flex flex-wrap gap-2">
                         `;
                         
+                        // Fix: Changed from data.skill.soft to data.skills.soft
                         data.skills.soft.forEach(skill => {
                             html += `<span class="bg-pink-900/50 text-pink-300 text-sm px-3 py-1 rounded-full">${skill}</span>`;
                         });
@@ -346,10 +374,11 @@
                 }
                 
                 // Certifications Section
+                // Fix: Changed from data.certification to data.certifications
                 if (data.certifications && data.certifications.length > 0) {
                     html += `
                         <div class="mb-8">
-                            <h3 class="text-lg font-semibold text-indigo-400 mb-3 pb-2 border-b border-slate-700">
+                            <h3 class="text-lg font-semibold text-indigo-400 mb-3 pb-2 border-b border-slate-707">
                                 <i class="fas fa-certificate mr-2"></i> Certifications
                             </h3>
                             <ul class="list-disc pl-5 space-y-2">
@@ -387,8 +416,119 @@
                 
                 resumeContainer.innerHTML = html;
             }
+            function displayJobData(data) {
+                var jobContainer = document.getElementById("jobData");
+                
+                if (data.error) {
+                    jobContainer.innerHTML = `
+                        <div class="bg-red-900/30 border border-red-500 text-red-200 px-4 py-3 rounded mb-4">
+                            <div class="flex">
+                                <div class="py-1"><i class="fas fa-exclamation-circle mr-2"></i></div>
+                                <div>
+                                    <p class="font-bold">${data.error}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = '';
+                
+                // Job Info Section
+                if (data.job_info) {
+                    html += `
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-green-400 mb-3 pb-2 border-b border-slate-700">
+                                <i class="fas fa-briefcase mr-2"></i> Job Information
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                ${createInfoItem('Title', data.job_info.title, 'briefcase')}
+                                ${createInfoItem('Company', data.job_info.company, 'building')}
+                                ${createInfoItem('Location', data.job_info.location, 'map-marker-alt')}
+                                ${createInfoItem('Type', data.job_info.type, 'clock')}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Technical Skills Section
+                if (data.technical_skills) {
+                    html += `
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-green-400 mb-3 pb-2 border-b border-slate-700">
+                                <i class="fas fa-code mr-2"></i> Technical Requirements
+                            </h3>
+                            <div class="space-y-4">
+                                ${createRequirementList('Required Skills', data.technical_skills.required, 'red')}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Domain Knowledge Section
+                if (data.domain_knowledge) {
+                    html += `
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-green-400 mb-3 pb-2 border-b border-slate-700">
+                                <i class="fas fa-lightbulb mr-2"></i> Domain Knowledge
+                            </h3>
+                            <div class="space-y-4">
+                                ${createRequirementList('Required Knowledge', data.domain_knowledge.required, 'teal')}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Experience Requirements Section
+                if (data.experience_requirements) {
+                    html += `
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-green-400 mb-3 pb-2 border-b border-slate-700">
+                                <i class="fas fa-briefcase mr-2"></i> Experience Requirements
+                            </h3>
+                            <div class="space-y-4">
+                                ${data.experience_requirements.minimum_years ? 
+                                    `<p class="text-gray-300"><span class="font-medium">Minimum Years:</span> ${data.experience_requirements.minimum_years}</p>` : ''}
+                                ${createRequirementList('Required Education', data.experience_requirements.required_education, 'blue')}
+                                ${createRequirementList('Specific Experience', data.experience_requirements.specific_experience, 'purple')}
+                            </div>
+                        </div>
+                    `;
+                }
 
-            // Add this helper function for skill categories
+                // Soft Skills Section
+                if (data.soft_skills) {
+                    html += `
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-green-400 mb-3 pb-2 border-b border-slate-700">
+                                <i class="fas fa-users mr-2"></i> Soft Skills
+                            </h3>
+                            <div class="space-y-4">
+                                ${createRequirementList('Required Skills', data.soft_skills.required, 'indigo')}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Job Responsibilities Section
+                if (data.job_responsibilities) {
+                    html += `
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold text-green-400 mb-3 pb-2 border-b border-slate-700">
+                                <i class="fas fa-tasks mr-2"></i> Job Responsibilities
+                            </h3>
+                            <div class="space-y-4">
+                                ${createRequirementList('Primary Responsibilities', data.job_responsibilities.primary, 'orange')}
+                                ${createRequirementList('Secondary Responsibilities', data.job_responsibilities.secondary, 'pink')}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                jobContainer.innerHTML = html;
+            }
+
             function createSkillCategory(title, skills, colorClass) {
                 return `
                     <div class="bg-slate-700/30 rounded-lg p-4">
@@ -417,16 +557,31 @@
                     </div>
                 `;
             }
-            
-            function formatCategoryName(name) {
-                // Convert snake_case to Title Case
-                return name.split('_')
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(' ');
+
+            function createRequirementList(title, items, color) {
+                if (!items || items.length === 0) return '';
+                return `
+                    <div>
+                        <h4 class="text-md font-medium text-gray-300 mb-2">${title}:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${items.map(item => `
+                                <span class="bg-${color}-900/50 text-${color}-300 text-sm px-3 py-1 rounded-full">
+                                    ${item}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
             }
             
             // Initialize
-            displayResumeData({{ data | tojson }});
+            {% if resume_data %}
+            displayResumeData({{ resume_data | tojson }});
+            {% endif %}
+            
+            {% if job_data %}
+            displayJobData({{ job_data | tojson }});
+            {% endif %}
         </script>
         {% endif %}
     </div>
@@ -438,7 +593,6 @@
                     2025 ResumeAI Parser - Powered by DeepSeek AI
                 </div>
                 <div class="flex space-x-4 mt-4 md:mt-0">
-                    <!-- GitHub link in the footer -->
                     <a href="https://github.com/Bernardbyy/ResumeParser-LLM" target="_blank" class="text-gray-400 hover:text-indigo-400">
                         <i class="fab fa-github"></i>
                     </a>
