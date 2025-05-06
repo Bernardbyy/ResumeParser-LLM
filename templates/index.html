@@ -529,6 +529,44 @@
                 jobContainer.innerHTML = html;
             }
 
+            // ADD THE FUNCTION HERE
+            function displayMatchResults(matchData) {
+                const matchContainer = document.getElementById("matchScore");
+                
+                const overallScore = Math.round(matchData.overall_score * 100);
+                const scoreColor = overallScore >= 80 ? 'green' : overallScore >= 60 ? 'yellow' : 'red';
+                
+                let html = `
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-${scoreColor}-500">${overallScore}%</h3>
+                        <p class="text-gray-300">Overall Match Score</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        ${Object.entries(matchData.category_scores).map(([category, data]) => `
+                            <div class="bg-slate-700/30 rounded-lg p-4">
+                                <h4 class="text-white font-medium capitalize">${category.replace('_', ' ')}</h4>
+                                <div class="mt-2">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm text-gray-400">Match Score</span>
+                                        <span class="text-sm font-medium text-${data.score >= 0.8 ? 'green' : data.score >= 0.6 ? 'yellow' : 'red'}-500">
+                                            ${Math.round(data.score * 100)}%
+                                        </span>
+                                    </div>
+                                    <div class="w-full bg-gray-700 rounded-full h-2">
+                                        <div class="bg-${data.score >= 0.8 ? 'green' : data.score >= 0.6 ? 'yellow' : 'red'}-500 h-2 rounded-full" 
+                                            style="width: ${data.score * 100}%"></div>
+                                    </div>
+                                    <p class="text-xs text-gray-400 mt-2">${data.details}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+                matchContainer.innerHTML = html;
+            }
+
             function createSkillCategory(title, skills, colorClass) {
                 return `
                     <div class="bg-slate-700/30 rounded-lg p-4">
@@ -581,6 +619,10 @@
             
             {% if job_data %}
             displayJobData({{ job_data | tojson }});
+            {% endif %}
+
+            {% if match_results %}
+            displayMatchResults({{ match_results | tojson }});
             {% endif %}
         </script>
         {% endif %}

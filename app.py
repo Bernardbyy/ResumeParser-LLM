@@ -4,6 +4,7 @@ from flask import Flask, request, render_template
 from pypdf import PdfReader 
 import json
 from resumeparser import ats_extractor, job_description_extractor
+from matcher import ResumeMatcher
 
 sys.path.insert(0, os.path.abspath(os.getcwd()))
 
@@ -30,6 +31,7 @@ def ats():
     # Get job description if provided
     job_description = request.form.get('job_description', '')
     job_data = None
+    match_results = None
     
     if job_description.strip():  # If job description is provided
         job_data = job_description_extractor(job_description)
@@ -39,9 +41,16 @@ def ats():
         parsed_resume = json.loads(resume_data)
         parsed_job = json.loads(job_data) if job_data else None
         
+        # Calculate match if both resume and job data exist
+        if parsed_resume and parsed_job:
+            from matcher import ResumeMatcher
+            matcher = ResumeMatcher()
+            match_results = matcher.calculate_match(parsed_resume, parsed_job)
+        
         return render_template('index.html', 
                              resume_data=parsed_resume,
-                             job_data=parsed_job)
+                             job_data=parsed_job,
+                             match_results=match_results)
     except json.JSONDecodeError as e:
         # Handle errors...
         error_message = {
