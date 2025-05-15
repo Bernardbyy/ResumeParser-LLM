@@ -31,3 +31,16 @@ A Flask-based web application that uses Large Language Models (LLMs) to extract 
 4. Ensure a directory named __DATA__ exists in the project root
 5. Run the app: python app.py
 6. Access the interface at http://localhost:8000
+
+## Resume Parser Demo
+Resume Parser Landing Page:
+![image](https://github.com/user-attachments/assets/13b2e2af-48b8-4406-80a7-c0cc4bb62904)
+
+Upload Resume from Local Drive: 
+![image](https://github.com/user-attachments/assets/0c1489e0-c284-46f6-9ef5-d07871b95d4f)
+
+Paste Job Description and Press Process Resume: 
+![image](https://github.com/user-attachments/assets/b01a277f-73bb-4a93-aab5-d09d526df023)
+
+Resume Analysis Section: 
+Personal Information and Experience: 
