@@ -43,19 +43,19 @@ Paste Job Description and Press Process Resume:
 ![image](https://github.com/user-attachments/assets/8232e4a9-c3cb-478b-8ff1-caecc9821f3a)
 
 
-Resume Analysis Section: 
+### Resume Analysis Section: <br>
 Personal Information and Experience: 
 ![image](https://github.com/user-attachments/assets/795c580a-3c74-4964-b166-d3128edfb329)
 
 Skills, Education and Additional Information:
 ![image](https://github.com/user-attachments/assets/d5cc7129-a59b-4324-8a0e-7594eb8ac5ad)
 
-Job Description Analysis:
+### Job Description Analysis: <br>
 Job Information, Technical Requirements, Domain Knowledge and Experience Requirements:
 ![image](https://github.com/user-attachments/assets/56069b5c-c526-4847-bfef-d86f202663bd)
 
 Job Responsibilities:
 ![image](https://github.com/user-attachments/assets/343dd1f6-bc87-4882-838d-46705732285b)
 
-Job Matching Analysis: 
+### Job Matching Analysis: <br>
 ![image](https://github.com/user-attachments/assets/70db6382-cccc-4316-a9e0-6debe33e78ff)
