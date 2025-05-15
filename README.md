@@ -32,7 +32,7 @@ A Flask-based web application that uses Large Language Models (LLMs) to extract 
 5. Run the app: python app.py
 6. Access the interface at http://localhost:8000
 
-## Resume Parser Demo
+## Resume Parser Demo <br>
 Resume Parser Landing Page:
 ![image](https://github.com/user-attachments/assets/13b2e2af-48b8-4406-80a7-c0cc4bb62904)
 
